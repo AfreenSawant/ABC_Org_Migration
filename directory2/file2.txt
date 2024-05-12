@@ -1,1 +1,0 @@
-Data in file2 from directory2
