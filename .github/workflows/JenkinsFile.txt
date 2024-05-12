@@ -1,21 +1,33 @@
 pipeline {
     agent any
-
+    
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from GitHub repository
+                git 'https://github.com/your-username/your-repo.git'
+            }
+        }
+        
         stage('Build') {
             steps {
-                echo 'Building..'
+                // Build your project (e.g., using Maven, Gradle, etc.)
+                sh 'mvn clean install'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
+        
+        // Add more stages as needed (e.g., test, deploy, etc.)
+    }
+    
+    // Post-build actions (optional)
+    post {
+        success {
+            // Actions to perform when the build succeeds
+            echo 'Build successful!'
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+        failure {
+            // Actions to perform when the build fails
+            echo 'Build failed!'
         }
     }
 }
